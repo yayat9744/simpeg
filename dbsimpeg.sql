@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jul 2020 pada 17.22
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Generation Time: Jul 25, 2020 at 05:37 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akun`
+-- Table structure for table `akun`
 --
 
 CREATE TABLE `akun` (
@@ -37,7 +36,7 @@ CREATE TABLE `akun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `akun`
+-- Dumping data for table `akun`
 --
 
 INSERT INTO `akun` (`id_akun`, `nip`, `app_level`, `password`, `status`) VALUES
@@ -46,7 +45,7 @@ INSERT INTO `akun` (`id_akun`, `nip`, `app_level`, `password`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dokumen`
+-- Table structure for table `dokumen`
 --
 
 CREATE TABLE `dokumen` (
@@ -59,7 +58,7 @@ CREATE TABLE `dokumen` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pegawai`
+-- Table structure for table `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -87,7 +86,7 @@ CREATE TABLE `pegawai` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengangkatan`
+-- Table structure for table `pengangkatan`
 --
 
 CREATE TABLE `pengangkatan` (
@@ -101,7 +100,7 @@ CREATE TABLE `pengangkatan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_agama`
+-- Table structure for table `ref_agama`
 --
 
 CREATE TABLE `ref_agama` (
@@ -109,10 +108,22 @@ CREATE TABLE `ref_agama` (
   `nama_agama` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ref_agama`
+--
+
+INSERT INTO `ref_agama` (`id_agama`, `nama_agama`) VALUES
+(1, 'Islam'),
+(2, 'Protestan'),
+(3, 'Katolik'),
+(4, 'Hindu'),
+(5, 'Buddha'),
+(6, 'Khonghucu');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_golongan`
+-- Table structure for table `ref_golongan`
 --
 
 CREATE TABLE `ref_golongan` (
@@ -123,7 +134,7 @@ CREATE TABLE `ref_golongan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_jabatan`
+-- Table structure for table `ref_jabatan`
 --
 
 CREATE TABLE `ref_jabatan` (
@@ -134,7 +145,7 @@ CREATE TABLE `ref_jabatan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_jk`
+-- Table structure for table `ref_jk`
 --
 
 CREATE TABLE `ref_jk` (
@@ -142,10 +153,18 @@ CREATE TABLE `ref_jk` (
   `nama_jk` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ref_jk`
+--
+
+INSERT INTO `ref_jk` (`id_jk`, `nama_jk`) VALUES
+(1, 'Laki-laki'),
+(2, 'Perempuan');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `riwayat_kenaikan_pangkat`
+-- Table structure for table `riwayat_kenaikan_pangkat`
 --
 
 CREATE TABLE `riwayat_kenaikan_pangkat` (
@@ -161,114 +180,114 @@ CREATE TABLE `riwayat_kenaikan_pangkat` (
 --
 
 --
--- Indeks untuk tabel `akun`
+-- Indexes for table `akun`
 --
 ALTER TABLE `akun`
   ADD PRIMARY KEY (`id_akun`);
 
 --
--- Indeks untuk tabel `dokumen`
+-- Indexes for table `dokumen`
 --
 ALTER TABLE `dokumen`
   ADD PRIMARY KEY (`id_dokumen`);
 
 --
--- Indeks untuk tabel `pegawai`
+-- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`),
   ADD UNIQUE KEY `nip` (`nip`);
 
 --
--- Indeks untuk tabel `pengangkatan`
+-- Indexes for table `pengangkatan`
 --
 ALTER TABLE `pengangkatan`
   ADD PRIMARY KEY (`id_pengangkatan`);
 
 --
--- Indeks untuk tabel `ref_agama`
+-- Indexes for table `ref_agama`
 --
 ALTER TABLE `ref_agama`
   ADD PRIMARY KEY (`id_agama`);
 
 --
--- Indeks untuk tabel `ref_golongan`
+-- Indexes for table `ref_golongan`
 --
 ALTER TABLE `ref_golongan`
   ADD PRIMARY KEY (`id_golongan`);
 
 --
--- Indeks untuk tabel `ref_jabatan`
+-- Indexes for table `ref_jabatan`
 --
 ALTER TABLE `ref_jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indeks untuk tabel `ref_jk`
+-- Indexes for table `ref_jk`
 --
 ALTER TABLE `ref_jk`
   ADD PRIMARY KEY (`id_jk`);
 
 --
--- Indeks untuk tabel `riwayat_kenaikan_pangkat`
+-- Indexes for table `riwayat_kenaikan_pangkat`
 --
 ALTER TABLE `riwayat_kenaikan_pangkat`
   ADD PRIMARY KEY (`id_riwayat`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `akun`
+-- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
   MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `dokumen`
+-- AUTO_INCREMENT for table `dokumen`
 --
 ALTER TABLE `dokumen`
   MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `pegawai`
+-- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
   MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `pengangkatan`
+-- AUTO_INCREMENT for table `pengangkatan`
 --
 ALTER TABLE `pengangkatan`
   MODIFY `id_pengangkatan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_agama`
+-- AUTO_INCREMENT for table `ref_agama`
 --
 ALTER TABLE `ref_agama`
-  MODIFY `id_agama` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_agama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_golongan`
+-- AUTO_INCREMENT for table `ref_golongan`
 --
 ALTER TABLE `ref_golongan`
   MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_jabatan`
+-- AUTO_INCREMENT for table `ref_jabatan`
 --
 ALTER TABLE `ref_jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_jk`
+-- AUTO_INCREMENT for table `ref_jk`
 --
 ALTER TABLE `ref_jk`
-  MODIFY `id_jk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `riwayat_kenaikan_pangkat`
+-- AUTO_INCREMENT for table `riwayat_kenaikan_pangkat`
 --
 ALTER TABLE `riwayat_kenaikan_pangkat`
   MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT;
