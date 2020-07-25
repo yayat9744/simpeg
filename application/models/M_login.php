@@ -1,37 +1,41 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_login extends CI_Model {
+class M_login extends CI_Model
+{
 
-	public function cek_nip($nip){
+	public function cek_nip($nip)
+	{
 		$this->db->from('akun');
-		$this->db->where('nip',$nip);
+		$this->db->where('nip', $nip);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
-	public function cek_password($password,$nip){
+	public function cek_password($password, $nip)
+	{
 		$this->db->from('akun');
-		$this->db->where('password',$password);
-		$this->db->where('nip',$nip);
+		$this->db->where('password', $password);
+		$this->db->where('nip', $nip);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function get_data_login($nip){
+	public function get_data_login($nip)
+	{
 		$this->db->from('akun');
-		$this->db->where('nip',$nip);
+		$this->db->join('pegawai', 'akun.nip = pegawai.nip', 'left');
+		$this->db->where('akun.nip', $nip);
 		$query = $this->db->get();
-		$data =$query->result_array();
-		$array=array();
+		$data = $query->result_array();
+		$array = array();
 		foreach ($data as $row) {
-			$array=$row;
+			$array = $row;
 		}
 		if (!isset($array)) {
-			$array='';
+			$array = '';
 		}
 		return $array;
 	}
-
 }
 
 /* End of file M_login.php */
