@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2020 at 06:22 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Generation Time: Jul 25, 2020 at 08:37 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,7 +52,8 @@ CREATE TABLE `dokumen` (
   `id_dokumen` int(11) NOT NULL,
   `nip` varchar(20) NOT NULL,
   `nama_dokumen` varchar(50) NOT NULL,
-  `type_dokumen` varchar(10) NOT NULL
+  `type_dokumen` varchar(10) NOT NULL,
+  `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -78,17 +79,15 @@ CREATE TABLE `pegawai` (
   `id_kabupaten` int(11) NOT NULL COMMENT 'api',
   `id_provinsi` int(11) NOT NULL COMMENT 'api',
   `alamat_lengkap` text NOT NULL,
-  `no_telepon` char(15) NOT NULL,
-  `id_jabatan` int(11) NOT NULL COMMENT 'ref jabatan',
-  `id_golongan` int(11) NOT NULL COMMENT 'ref golongan'
+  `no_telepon` char(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `id_jk`, `id_agama`, `foto`, `email`, `id_desa`, `id_kecamatan`, `id_kabupaten`, `id_provinsi`, `alamat_lengkap`, `no_telepon`, `id_jabatan`, `id_golongan`) VALUES
-(1, '198609262015051001', 'Surya', 'Drs', 'M.H', '', '0000-00-00', 0, 0, '', '', 0, 0, 0, 0, '', '', 0, 0);
+INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `id_jk`, `id_agama`, `foto`, `email`, `id_desa`, `id_kecamatan`, `id_kabupaten`, `id_provinsi`, `alamat_lengkap`, `no_telepon`) VALUES
+(1, '198609262015051001', 'Surya', 'Drs', 'M.H', '', '0000-00-00', 0, 0, '', '', 0, 0, 0, 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -100,8 +99,7 @@ CREATE TABLE `pengangkatan` (
   `id_pengangkatan` int(11) NOT NULL,
   `nip` int(20) NOT NULL,
   `tanggal_pengangkatan` date NOT NULL,
-  `masa_aktif_jabatan` date NOT NULL,
-  `id_dokumen` int(11) DEFAULT NULL
+  `masa_aktif_jabatan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,6 +136,28 @@ CREATE TABLE `ref_golongan` (
   `nama_golongan` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ref_golongan`
+--
+
+INSERT INTO `ref_golongan` (`id_golongan`, `nama_golongan`) VALUES
+(1, 'I/A'),
+(3, 'I/B'),
+(4, 'I/C'),
+(5, 'I/D'),
+(6, 'II/A'),
+(7, 'II/B'),
+(8, 'II/C'),
+(9, 'II/D'),
+(10, 'III/A'),
+(11, 'III/B'),
+(12, 'III/C'),
+(13, 'III/D'),
+(14, 'IV/A'),
+(15, 'IV/B'),
+(16, 'IV/C'),
+(17, 'IV/D');
+
 -- --------------------------------------------------------
 
 --
@@ -146,8 +166,23 @@ CREATE TABLE `ref_golongan` (
 
 CREATE TABLE `ref_jabatan` (
   `id_jabatan` int(11) NOT NULL,
-  `nama_jabatan` int(11) NOT NULL
+  `nama_jabatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ref_jabatan`
+--
+
+INSERT INTO `ref_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
+(1, 'CAMAT'),
+(2, 'SEKERTARIS'),
+(3, 'KASUBAG UMUM DAN KEPEGAWAIAN'),
+(4, 'KASUBAG PEP DAN KEUANGAN'),
+(5, 'KASI PEMERINTAHAN DAN PELAYANAN'),
+(6, 'KASI KESEJAHTERAAN SOSIAL'),
+(7, 'KASI PEMBANGUNAN DAN PEMBERDAYAAN MASYARAKAT'),
+(8, 'KASI TRANTIBUM'),
+(9, 'PELAKSANA');
 
 -- --------------------------------------------------------
 
@@ -179,7 +214,8 @@ CREATE TABLE `riwayat_kenaikan_pangkat` (
   `nip` int(20) NOT NULL,
   `id_jabatan` int(11) NOT NULL,
   `id_golongan` int(11) NOT NULL,
-  `tanggal_kenaikan` date NOT NULL
+  `tanggal_kenaikan` date NOT NULL,
+  `no_sk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -279,13 +315,13 @@ ALTER TABLE `ref_agama`
 -- AUTO_INCREMENT for table `ref_golongan`
 --
 ALTER TABLE `ref_golongan`
-  MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `ref_jabatan`
 --
 ALTER TABLE `ref_jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ref_jk`

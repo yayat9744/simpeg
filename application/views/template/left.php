@@ -1,5 +1,6 @@
 <?php
   $segmen1=$this->uri->segment(1);
+  $segmen2=$this->uri->segment(2);
 ?>
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -35,13 +36,35 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?= base_url('');?>" class="nav-link  <?php if($segmen1=='pengguna'){ echo 'active';}?>">
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Pegawai
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('pegawai');?>" class="nav-link <?php if($segmen1=='pegawai'){ echo 'active';}?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pegawai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('pegawai/dokumen');?>" class="nav-link <?php if($segmen1=='pegawai' AND $segmen2=='dokumen'){ echo 'active';}?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dokumen Pegawai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('pegawai/riwayat');?>" class="nav-link <?php if($segmen1=='pegawai' AND $segmen2=='riwayat'){ echo 'active';}?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Riwayat Kenaikan Pangkat</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -53,31 +76,57 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('');?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jenis Kelamin</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('');?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agama</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('');?>" class="nav-link">
+                <a href="<?= base_url('master/golongan');?>" class="nav-link <?php if($segmen1=='master' AND $segmen2=='golongan'){ echo 'active';}?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Golongan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('');?>" class="nav-link">
+                <a href="<?= base_url('master/jabatan');?>" class="nav-link <?php if($segmen1=='master' AND $segmen2=='jabatan'){ echo 'active';}?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jabatan</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="<?= base_url('notifikasi');?>" class="nav-link  <?php if($segmen1=='notifikasi'){ echo 'active';}?>">
+              <i class="nav-icon fas fa-bell"></i>
+              <p>
+                Notifikasi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Akun
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('dashboard/profil');?>" class="nav-link <?php if($segmen1=='dashboard' AND $segmen2=='profil'){ echo 'active';}?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Profil</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('dashboard/ubahpassword');?>" class="nav-link <?php if($segmen1=='dashboard' AND $segmen2=='ubahpassword'){ echo 'active';}?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ubah Password</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('login/logout');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Logout</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

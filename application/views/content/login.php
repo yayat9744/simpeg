@@ -21,12 +21,12 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>AYO</b>DONOR</a>
+      <a href="../../index2.html"><b>SIM</b>PEG</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Login Untuk Masuk Kesistem</p>
+        <p class="login-box-msg">Login Untuk Masuk ke Sistem</p>
 
         <form action="<?= base_url('login/cek_login');?>" method="post" role="form">
           <div class="input-group mb-3">
@@ -48,15 +48,15 @@
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-                <input type="checkbox" id="remember">
+                <a href="#">
                 <label for="remember">
-                  Remember Me
-                </label>
+                  Lupa password?
+                </label></a>
               </div>
             </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block">Masuk</button>
             </div>
             <!-- /.col -->
           </div>
