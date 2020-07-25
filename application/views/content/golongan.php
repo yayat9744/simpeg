@@ -8,16 +8,16 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-             Tambah Data Jenis Kelamin
+          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-default">
+             Tambah Data
           </button>
         </div>
         <div class="card-body">
-          <table id="jk" class="table table-bordered table-hover nowrap" cellspacing="0" width="100%">
+          <table id="golongan" class="table table-bordered table-striped table-hover nowrap table-sm" cellspacing="0" width="100%">
             <thead>
               <tr>
                 <th>No</th>
-                <th>Jenis Kelamin</th>
+                <th>Nama Golongan</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -25,19 +25,19 @@
               <!--perulangan data dari db -->
               <?php 
               $no = 1;
-              foreach ($jk as $data) {
+              foreach ($golongan as $data) {
                 ?>
                 <tr>
                   <td><?= $no++;?></td>
-                  <td><?= $data->nama_jk; ?></td>
+                  <td><?= $data->nama_golongan; ?></td>
                   <td>
                     <a href="javascript:;" 
-                    data-id_jk='<?= $data->id_jk; ?>'
-                    data-nama_jk='<?= $data->nama_jk; ?>' 
-                    class="btn btn-primary edit" >
+                    data-id_golongan='<?= $data->id_golongan; ?>'
+                    data-nama_golongan='<?= $data->nama_golongan; ?>' 
+                    class="btn btn-primary edit btn-sm" >
                     Edit
                   </a>
-                  <a href="<?= base_url('jk/hapus/'.$data->id_jk); ?>" class="btn btn-danger btn-md tombol-hapus">Hapus</a>
+                  <a href="<?= base_url('golongan/hapus/'.$data->id_golongan); ?>" class="btn btn-danger btn-sm tombol-hapus">Hapus</a>
 
                 </td>
 
@@ -49,7 +49,7 @@
           <tfoot>
             <tr>
               <th>No</th>
-                <th>Jenis Kelamin</th>
+                <th>Nama Golongan</th>
                 <th>Aksi</th>
             </tr>
           </tfoot>
@@ -70,23 +70,23 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah Data Jenis Kelamin</h4>
+        <h4 class="modal-title">Tambah Data Golongan</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <form role="form" action="<?= base_url('jk/simpan');?>" method="post">
+       <form role="form" action="<?= base_url('master/simpangolongan');?>" method="post">
         <div class="card-body">
         <div class="form-group">
-          <label for="exampleInputEmail1">Jenis Kelamin</label>
-          <input type="text" class="form-control" name="nama_jk" placeholder="Input Jenis Kelamin">
+          <label for="exampleInputEmail1">Nama Golongan</label>
+          <input type="text" class="form-control" name="nsms_golongan" placeholder="Input Nama Golongan">
+        </div>
         </div>
       </div>
-    </div>
     <div class="modal-footer justify-content-between">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
     </div>
   </form>
 </div>
@@ -101,23 +101,23 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Edit Data Jenis Kelamin</h4>
+        <h4 class="modal-title">Edit Data Golongan</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <form role="form" action="<?= base_url('jk/simpan');?>" method="post">
+       <form role="form" action="<?= base_url('master/golongan/simpangolongan');?>" method="post">
         <div class="card-body">
-          <input type="hidden" name="id_jk" id="id_jk" >
+          <input type="hidden" name="id_golongan" id="id_golongan" >
           <div class="form-group">
-            <label for="exampleInputEmail1">Jenis Kelamin</label>
-            <input type="text" class="form-control" name="nama_jk" id="nama_jk" placeholder="Input Jenis Kelamin">
+            <label for="exampleInputEmail1">Nama Golongan</label>
+            <input type="text" class="form-control" name="nama_golongan" id="nama_golongan" placeholder="Input Nama Golongan">
           </div>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" >Close</button>
+        <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
       </div>
     </form>
   </div>
@@ -126,11 +126,11 @@
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
+</div>
 <script type="text/javascript">
   $(function()
   {
-    $('#jk').DataTable({
+    $('#golongan').DataTable({
       responsive:true
     });
 
@@ -151,7 +151,7 @@
 
       Swal.fire({
         title: 'Apakah Anda yakin?',
-        text: "Data mahasiswa akan dihapus",
+        text: "Data Golongan akan dihapus",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -170,10 +170,10 @@
      })
     });
 
-    $("#jk").on("click",".edit",function(){
+    $("#golongan").on("click",".edit",function(){
       $("#modal-edit").modal("show");
-      $('#id_jk').val($(this).data('id_jk'));
-      $('#nama_jk').val($(this).data('nama_jk'));
+      $('#id_golongan').val($(this).data('id_golongan'));
+      $('#nama_golongan').val($(this).data('nama_golongan'));
     });
 
   });
