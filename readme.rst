@@ -14,3 +14,12 @@ for a given task.
 App Name
 *******************
 SIMPEG NEW
+
+******************
+PROGRESS Development
+******************
+Dashboard (On Process)
+Pegawai (bagian dokumen saja belum)
+Master (Finish)
+Notifikasi (On Process)
+Akun (On Process)
