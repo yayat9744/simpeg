@@ -17,11 +17,6 @@ class Dashboard extends CI_Controller
 	{
 		$data['session'] = $this->session->all_userdata();
 		$data['tampilan'] = 'dashboard';
-		$data['suma'] = $this->M_dashboard->sumdarahA();
-		$data['countAdmin'] = $this->M_dashboard->countAdmin();
-		//	$this->load->model('M_dashboard');
-		// $this->M_dashboard->hitungJumlahPendonor($data['total_pendonor']);
-		//$data['total_pendonor'] = $this->m_dashboard->hitungJumlahPendonor();
 		$this->load->view('template/media', $data);
 	}
 }
