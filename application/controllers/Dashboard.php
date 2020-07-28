@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
+		$this->load->model('m_pegawai');
 		if (!$this->session->userdata('nip')) {
 			redirect('login');
 		}
@@ -17,6 +18,14 @@ class Dashboard extends CI_Controller
 	{
 		$data['session'] = $this->session->all_userdata();
 		$data['tampilan'] = 'dashboard';
+		$this->load->view('template/media', $data);
+	}
+	public function profil()
+	{
+		$data['session'] = $this->session->all_userdata();
+		$nip = $this->session->userdata('nip');
+		$data['dt_pegawai'] = $this->m_pegawai->get_data_detail($nip);
+		$data['tampilan'] = 'profil';
 		$this->load->view('template/media', $data);
 	}
 }
