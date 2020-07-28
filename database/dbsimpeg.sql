@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2020 at 07:44 PM
+-- Generation Time: Jul 28, 2020 at 10:31 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -41,7 +41,7 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`id_akun`, `nip`, `app_level`, `password`, `status`) VALUES
 (2, '198609262015051002', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'A'),
-(3, '198609262015051003', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'A');
+(3, '198609262015051002', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'A');
 
 -- --------------------------------------------------------
 
@@ -53,9 +53,39 @@ CREATE TABLE `dokumen` (
   `id_dokumen` int(11) NOT NULL,
   `nip` varchar(20) NOT NULL,
   `nama_dokumen` varchar(50) NOT NULL,
-  `type_dokumen` varchar(10) NOT NULL,
+  `type_dokumen` varchar(20) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dokumen`
+--
+
+INSERT INTO `dokumen` (`id_dokumen`, `nip`, `nama_dokumen`, `type_dokumen`, `keterangan`) VALUES
+(4, '198609262015051002', 'SK', 'SK', 'UMPAN.docx');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifikasi`
+--
+
+CREATE TABLE `notifikasi` (
+  `id_notifikasi` int(11) NOT NULL,
+  `nip` varchar(20) NOT NULL,
+  `status_notifikasi` enum('R','U') NOT NULL COMMENT 'R=Read, U=Unread',
+  `tanggal_notifikasi` datetime NOT NULL,
+  `temp_tgl` date NOT NULL,
+  `jenis_notifikasi` enum('KB','KP','P') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notifikasi`
+--
+
+INSERT INTO `notifikasi` (`id_notifikasi`, `nip`, `status_notifikasi`, `tanggal_notifikasi`, `temp_tgl`, `jenis_notifikasi`) VALUES
+(117, '198609262015051002', 'R', '2020-07-29 00:30:27', '2020-07-29', 'KB'),
+(118, '198609262015051002', 'U', '2020-07-29 00:30:27', '2020-07-29', 'KP');
 
 -- --------------------------------------------------------
 
@@ -90,8 +120,7 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `id_jk`, `id_agama`, `foto`, `email`, `id_desa`, `id_kecamatan`, `id_kabupaten`, `id_provinsi`, `alamat_lengkap`, `no_telepon`, `id_jabatan`, `id_golongan`) VALUES
-(3, '198609262015051002', 'Yayat Nurhidayat', '', 'S.Kom', 'Majalengka', '1997-04-04', 1, 1, 'pancingan.jpg', 'yayat9744@gmail.com', '3210060004', '3210060', '3210', 32, 'Panyindangan', '087654678876', 1, 14),
-(4, '198609262015051003', 'Firmansyah', 'Drs', '', 'Majalengka', '1997-05-04', 1, 1, 'LOGO_FFM.png', 'fajar.anugrah85@yahoo.co.id', '3210180010', '3210180', '3210', 32, 'Sukamulya', '087865765543', 2, 14);
+(3, '198609262015051002', 'Yayat Nurhidayat', '', 'S.Kom', 'Majalengka', '1997-04-04', 1, 1, 'pancingan.jpg', 'yayat9744@gmail.com', '3210060004', '3210060', '3210', 32, 'Panyindangan', '087654678876', 1, 14);
 
 -- --------------------------------------------------------
 
@@ -114,8 +143,7 @@ CREATE TABLE `pengangkatan` (
 --
 
 INSERT INTO `pengangkatan` (`id_pengangkatan`, `nip`, `tanggal_pengangkatan`, `nomor_sk`, `tgl_kenaikan_berkala`, `tgl_kenaikan_pangkat`, `tgl_pensiun`) VALUES
-(2, '198609262015051002', '2020-07-31', 'SK2', '2022-07-31', '2022-07-31', '2030-07-31'),
-(3, '198609262015051003', '2020-09-30', 'SK3', '2022-09-30', '2022-09-30', '2030-09-30');
+(2, '198609262015051002', '2020-07-31', 'SK2', '2020-08-29', '2020-10-29', '2030-07-31');
 
 -- --------------------------------------------------------
 
@@ -243,10 +271,7 @@ CREATE TABLE `riwayat_kenaikan_pangkat` (
 
 INSERT INTO `riwayat_kenaikan_pangkat` (`id_riwayat`, `nip`, `id_jabatan`, `id_golongan`, `tanggal_kenaikan`, `kenaikan_berkala`, `kenaikan_pangkat`, `pensiun`, `no_sk`) VALUES
 (2, '198609262015051002', 1, 13, '2020-07-26', '2022-07-26', '2022-07-26', '2022-07-26', 'SK'),
-(4, '198609262015051003', 2, 12, '2020-07-27', '2022-07-27', '2022-07-27', '2022-07-27', 'SK1'),
-(6, '198609262015051002', 1, 14, '2020-07-31', '2022-07-31', '2022-07-31', '2030-07-31', 'SK2'),
-(7, '198609262015051003', 2, 13, '2020-08-01', '2022-08-01', '2022-08-01', '2035-08-01', 'SK2'),
-(8, '198609262015051003', 2, 14, '2020-09-30', '2022-09-30', '2022-09-30', '2030-09-30', 'SK3');
+(6, '198609262015051002', 1, 14, '2020-07-31', '2020-08-29', '2020-10-29', '2030-07-31', 'SK2');
 
 --
 -- Indexes for dumped tables
@@ -263,6 +288,12 @@ ALTER TABLE `akun`
 --
 ALTER TABLE `dokumen`
   ADD PRIMARY KEY (`id_dokumen`);
+
+--
+-- Indexes for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  ADD PRIMARY KEY (`id_notifikasi`);
 
 --
 -- Indexes for table `pegawai`
@@ -321,7 +352,13 @@ ALTER TABLE `akun`
 -- AUTO_INCREMENT for table `dokumen`
 --
 ALTER TABLE `dokumen`
-  MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  MODIFY `id_notifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
