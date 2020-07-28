@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2020 at 08:37 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Jul 27, 2020 at 07:44 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,8 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id_akun`, `nip`, `app_level`, `password`, `status`) VALUES
-(1, '198609262015051001', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'A');
+(2, '198609262015051002', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'A'),
+(3, '198609262015051003', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'A');
 
 -- --------------------------------------------------------
 
@@ -74,20 +75,23 @@ CREATE TABLE `pegawai` (
   `id_agama` int(11) NOT NULL COMMENT 'ref_jk',
   `foto` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `id_desa` int(11) NOT NULL COMMENT 'api',
-  `id_kecamatan` int(11) NOT NULL COMMENT 'api',
-  `id_kabupaten` int(11) NOT NULL COMMENT 'api',
+  `id_desa` varchar(20) NOT NULL COMMENT 'api',
+  `id_kecamatan` varchar(20) NOT NULL COMMENT 'api',
+  `id_kabupaten` varchar(20) NOT NULL COMMENT 'api',
   `id_provinsi` int(11) NOT NULL COMMENT 'api',
   `alamat_lengkap` text NOT NULL,
-  `no_telepon` char(15) NOT NULL
+  `no_telepon` char(15) NOT NULL,
+  `id_jabatan` int(11) NOT NULL,
+  `id_golongan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `id_jk`, `id_agama`, `foto`, `email`, `id_desa`, `id_kecamatan`, `id_kabupaten`, `id_provinsi`, `alamat_lengkap`, `no_telepon`) VALUES
-(1, '198609262015051001', 'Surya', 'Drs', 'M.H', '', '0000-00-00', 0, 0, '', '', 0, 0, 0, 0, '', '');
+INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `id_jk`, `id_agama`, `foto`, `email`, `id_desa`, `id_kecamatan`, `id_kabupaten`, `id_provinsi`, `alamat_lengkap`, `no_telepon`, `id_jabatan`, `id_golongan`) VALUES
+(3, '198609262015051002', 'Yayat Nurhidayat', '', 'S.Kom', 'Majalengka', '1997-04-04', 1, 1, 'pancingan.jpg', 'yayat9744@gmail.com', '3210060004', '3210060', '3210', 32, 'Panyindangan', '087654678876', 1, 14),
+(4, '198609262015051003', 'Firmansyah', 'Drs', '', 'Majalengka', '1997-05-04', 1, 1, 'LOGO_FFM.png', 'fajar.anugrah85@yahoo.co.id', '3210180010', '3210180', '3210', 32, 'Sukamulya', '087865765543', 2, 14);
 
 -- --------------------------------------------------------
 
@@ -97,10 +101,21 @@ INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `gelar_depan`, `gelar_belaka
 
 CREATE TABLE `pengangkatan` (
   `id_pengangkatan` int(11) NOT NULL,
-  `nip` int(20) NOT NULL,
+  `nip` varchar(20) NOT NULL,
   `tanggal_pengangkatan` date NOT NULL,
-  `masa_aktif_jabatan` date NOT NULL
+  `nomor_sk` varchar(50) NOT NULL,
+  `tgl_kenaikan_berkala` date NOT NULL,
+  `tgl_kenaikan_pangkat` date NOT NULL,
+  `tgl_pensiun` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pengangkatan`
+--
+
+INSERT INTO `pengangkatan` (`id_pengangkatan`, `nip`, `tanggal_pengangkatan`, `nomor_sk`, `tgl_kenaikan_berkala`, `tgl_kenaikan_pangkat`, `tgl_pensiun`) VALUES
+(2, '198609262015051002', '2020-07-31', 'SK2', '2022-07-31', '2022-07-31', '2030-07-31'),
+(3, '198609262015051003', '2020-09-30', 'SK3', '2022-09-30', '2022-09-30', '2030-09-30');
 
 -- --------------------------------------------------------
 
@@ -156,7 +171,8 @@ INSERT INTO `ref_golongan` (`id_golongan`, `nama_golongan`) VALUES
 (14, 'IV/A'),
 (15, 'IV/B'),
 (16, 'IV/C'),
-(17, 'IV/D');
+(17, 'IV/D'),
+(18, 'IV/E');
 
 -- --------------------------------------------------------
 
@@ -175,7 +191,7 @@ CREATE TABLE `ref_jabatan` (
 
 INSERT INTO `ref_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 (1, 'CAMAT'),
-(2, 'SEKERTARIS'),
+(2, 'SEKRETARIS'),
 (3, 'KASUBAG UMUM DAN KEPEGAWAIAN'),
 (4, 'KASUBAG PEP DAN KEUANGAN'),
 (5, 'KASI PEMERINTAHAN DAN PELAYANAN'),
@@ -211,12 +227,26 @@ INSERT INTO `ref_jk` (`id_jk`, `nama_jk`) VALUES
 
 CREATE TABLE `riwayat_kenaikan_pangkat` (
   `id_riwayat` int(11) NOT NULL,
-  `nip` int(20) NOT NULL,
+  `nip` varchar(20) NOT NULL,
   `id_jabatan` int(11) NOT NULL,
   `id_golongan` int(11) NOT NULL,
   `tanggal_kenaikan` date NOT NULL,
+  `kenaikan_berkala` date NOT NULL,
+  `kenaikan_pangkat` date NOT NULL,
+  `pensiun` date NOT NULL,
   `no_sk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `riwayat_kenaikan_pangkat`
+--
+
+INSERT INTO `riwayat_kenaikan_pangkat` (`id_riwayat`, `nip`, `id_jabatan`, `id_golongan`, `tanggal_kenaikan`, `kenaikan_berkala`, `kenaikan_pangkat`, `pensiun`, `no_sk`) VALUES
+(2, '198609262015051002', 1, 13, '2020-07-26', '2022-07-26', '2022-07-26', '2022-07-26', 'SK'),
+(4, '198609262015051003', 2, 12, '2020-07-27', '2022-07-27', '2022-07-27', '2022-07-27', 'SK1'),
+(6, '198609262015051002', 1, 14, '2020-07-31', '2022-07-31', '2022-07-31', '2030-07-31', 'SK2'),
+(7, '198609262015051003', 2, 13, '2020-08-01', '2022-08-01', '2022-08-01', '2035-08-01', 'SK2'),
+(8, '198609262015051003', 2, 14, '2020-09-30', '2022-09-30', '2022-09-30', '2030-09-30', 'SK3');
 
 --
 -- Indexes for dumped tables
@@ -285,7 +315,7 @@ ALTER TABLE `riwayat_kenaikan_pangkat`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dokumen`
@@ -297,13 +327,13 @@ ALTER TABLE `dokumen`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pengangkatan`
 --
 ALTER TABLE `pengangkatan`
-  MODIFY `id_pengangkatan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengangkatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ref_agama`
@@ -315,13 +345,13 @@ ALTER TABLE `ref_agama`
 -- AUTO_INCREMENT for table `ref_golongan`
 --
 ALTER TABLE `ref_golongan`
-  MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ref_jabatan`
 --
 ALTER TABLE `ref_jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ref_jk`
@@ -333,7 +363,7 @@ ALTER TABLE `ref_jk`
 -- AUTO_INCREMENT for table `riwayat_kenaikan_pangkat`
 --
 ALTER TABLE `riwayat_kenaikan_pangkat`
-  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

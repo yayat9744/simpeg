@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Master extends CI_Controller {
+class Master extends CI_Controller
+{
 	function __construct()
 	{
 		parent::__construct();
@@ -9,49 +10,35 @@ class Master extends CI_Controller {
 		if (!$this->session->userdata('nip')) {
 			redirect('login');
 		}
-		
 	}
 
 	public function golongan()
 	{
-		$data['session']=$this->session->all_userdata();
-		$data['golongan']=$this->m_master->get_data_golongan();
-		$data['tampilan']='golongan';
+		$data['session'] = $this->session->all_userdata();
+		$data['golongan'] = $this->m_master->get_data_golongan();
+		$data['tampilan'] = 'golongan';
 		$this->load->view('template/media', $data);
 	}
-
-	public function tambahgolongan()
-	{
-		$data['tampilan']='tambah-golongan';
-		$this->load->view('template/media', $data);
-	}
-
-	public function editgolongan($id_golongan)
-	{
-		$data['edit'] = $this->m_master->get_data_edit_golongan($id_golongan);
-		$this->load->view('edit',$data);
-	}
-	//edit ajak
 
 	public function simpangolongan()
 	{
-		if(empty($this->input->post('id_golongan'))){
+		if (empty($this->input->post('id_golongan'))) {
 			$aksi = $this->m_master->simpan_golongan();
-			if($aksi){
-				$this->session->set_flashdata('berhasil','Data golongan Berhasil Disimpan');
+			if ($aksi) {
+				$this->session->set_flashdata('berhasil', 'Data Golongan Berhasil Disimpan');
 				redirect('master/golongan');
-			}else{
-				$this->session->set_flashdata('gagal','Data golongan Gagal Disimpan');
-				redirect('master/golongan/tambah');
+			} else {
+				$this->session->set_flashdata('gagal', 'Data Golongan Gagal Disimpan');
+				redirect('master/golongan');
 			}
-		}else{
+		} else {
 			$aksi = $this->m_master->ubah_golongan();
-			if($aksi){
-				$this->session->set_flashdata('berhasil','Data golongan Berhasil Diubah');
+			if ($aksi) {
+				$this->session->set_flashdata('berhasil', 'Data Golongan Berhasil Diubah');
 				redirect('master/golongan');
-			}else{
-				$this->session->set_flashdata('berhasil','Data golongan Tidak Berhasil Diubah');
-				redirect('master/golongan/edit');
+			} else {
+				$this->session->set_flashdata('berhasil', 'Data Golongan Tidak Berhasil Diubah');
+				redirect('master/golongan');
 			}
 		}
 	}
@@ -59,55 +46,42 @@ class Master extends CI_Controller {
 	public function hapusgolongan($id_golongan)
 	{
 		$aksi = $this->m_master->delete_golongan($id_golongan);
-		if($aksi){
-			$this->session->set_flashdata('berhasil','Data golongan Berhasil Dihapus');
-			redirect('golongan');
-		}else{
-			$this->session->set_flashdata('gagal','Data golongan Tidak Berhasil Dihapus');
-			redirect('golongan');
+		if ($aksi) {
+			$this->session->set_flashdata('berhasil', 'Data Golongan Berhasil Dihapus');
+			redirect('master/golongan');
+		} else {
+			$this->session->set_flashdata('gagal', 'Data Golongan Tidak Berhasil Dihapus');
+			redirect('master/golongan');
 		}
-    }
-    
-    public function jabatan()
-	{
-		$data['session']=$this->session->all_userdata();
-		$data['jabatan']=$this->m_master->get_data();
-		$data['tampilan']='jabatan';
-		$this->load->view('template/media', $data);
 	}
 
-	public function tambahjabatan()
+	public function jabatan()
 	{
-		$data['tampilan']='tambah-jabatan';
+		$data['session'] = $this->session->all_userdata();
+		$data['jabatan'] = $this->m_master->get_data();
+		$data['tampilan'] = 'jabatan';
 		$this->load->view('template/media', $data);
 	}
-
-	public function editjabatan($id_jabatan)
-	{
-		$data['edit'] = $this->m_master->get_data_edit($id_jabatan);
-		$this->load->view('edit',$data);
-	}
-	//edit ajak
 
 	public function simpanjabatan()
 	{
-		if(empty($this->input->post('id_jabatan'))){
+		if (empty($this->input->post('id_jabatan'))) {
 			$aksi = $this->m_master->simpan();
-			if($aksi){
-				$this->session->set_flashdata('berhasil','Data jabatan Berhasil Disimpan');
-				redirect('jabatan');
-			}else{
-				$this->session->set_flashdata('gagal','Data jabatan Gagal Disimpan');
-				redirect('jabatan/tambah');
+			if ($aksi) {
+				$this->session->set_flashdata('berhasil', 'Data Jabatan Berhasil Disimpan');
+				redirect('master/jabatan');
+			} else {
+				$this->session->set_flashdata('gagal', 'Data Jabatan Gagal Disimpan');
+				redirect('master/jabatan');
 			}
-		}else{
+		} else {
 			$aksi = $this->m_master->ubah();
-			if($aksi){
-				$this->session->set_flashdata('berhasil','Data jabatan Berhasil Diubah');
-				redirect('jabatan');
-			}else{
-				$this->session->set_flashdata('berhasil','Data jabatan Tidak Berhasil Diubah');
-				redirect('jabatan/edit');
+			if ($aksi) {
+				$this->session->set_flashdata('berhasil', 'Data Jabatan Berhasil Diubah');
+				redirect('master/jabatan');
+			} else {
+				$this->session->set_flashdata('berhasil', 'Data Jabatan Tidak Berhasil Diubah');
+				redirect('master/jabatan');
 			}
 		}
 	}
@@ -115,15 +89,14 @@ class Master extends CI_Controller {
 	public function hapusjabatan($id_jabatan)
 	{
 		$aksi = $this->m_master->delete($id_jabatan);
-		if($aksi){
-			$this->session->set_flashdata('berhasil','Data jabatan Berhasil Dihapus');
-			redirect('jabatan');
-		}else{
-			$this->session->set_flashdata('gagal','Data jabatan Tidak Berhasil Dihapus');
-			redirect('jabatan');
+		if ($aksi) {
+			$this->session->set_flashdata('berhasil', 'Data Jabatan Berhasil Dihapus');
+			redirect('master/jabatan');
+		} else {
+			$this->session->set_flashdata('gagal', 'Data Jabatan Tidak Berhasil Dihapus');
+			redirect('master/jabatan');
 		}
 	}
-
 }
 
 /* End of file Master.php */

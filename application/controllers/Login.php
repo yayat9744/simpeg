@@ -22,8 +22,6 @@ class Login extends CI_Controller
 			$cekpassword = $this->m_login->cek_password($password, $nip);
 			if ($cekpassword > 0) {
 				$session = $this->m_login->get_data_login($nip);
-				var_dump($session);
-				// die;
 				$this->session->set_userdata($session);
 				redirect('dashboard');
 			} else {
