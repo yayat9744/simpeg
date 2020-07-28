@@ -6,11 +6,7 @@ class Dashboard extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-<<<<<<< HEAD
 		$this->load->model('m_dashboard');
-=======
-		$this->load->model('M_dashboard');
->>>>>>> c047287d365bae0e1d727ab91fc3e6aa6c65d370
 		$this->load->model('m_pegawai');
 		if (!$this->session->userdata('nip')) {
 			redirect('login');
@@ -23,10 +19,6 @@ class Dashboard extends CI_Controller
 		$data['tampilan'] = 'dashboard';
 		$this->load->view('template/media', $data);
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> c047287d365bae0e1d727ab91fc3e6aa6c65d370
 	public function profil()
 	{
 		$data['session'] = $this->session->all_userdata();
@@ -35,7 +27,6 @@ class Dashboard extends CI_Controller
 		$data['tampilan'] = 'profil';
 		$this->load->view('template/media', $data);
 	}
-<<<<<<< HEAD
 
 	public function ubah_password()
 	{
@@ -110,8 +101,6 @@ class Dashboard extends CI_Controller
 
 		$this->output->set_content_type('application/json')->set_output(json_encode($json));
 	}
-=======
->>>>>>> c047287d365bae0e1d727ab91fc3e6aa6c65d370
 }
  /* End of file Dashboard.php */
  /* Location: ./application/controllers/Dashboard.php */
