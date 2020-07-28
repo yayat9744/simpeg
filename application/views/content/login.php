@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ayo Donor | Log in</title>
+  <title>Sistem Informasi Kepegawaian | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="Sistem Informasi Kepegawaian, SIMPEG, Hiland.id">
+  <meta name="description" content="Sistem Informasi Kepegawain atau SIMPEG dikembangkan oleh Hiland Group, menggunakan framework CI3, dan fitur realtime notifikasi informasi kenaikan berkala, kenaikan pangkat dan informasi pensiun.">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?= base_url();?>aset/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="<?= base_url();?>aset/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= base_url();?>aset/dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <?php $this->load->view('template/head.php'); ?>
+
 </head>
+
 <body class="hold-transition login-page">
+
+  <div class='flash-data' data-flashdata='<?= $this->session->flashdata('berhasil'); ?>'></div>
+  <div class='flash-data-tidak' data-flashdata='<?= $this->session->flashdata('gagal'); ?>'></div>
+
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>SIM</b>PEG</a>
+      <a href="#"><b>SIM</b>PEG</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Login Untuk Masuk ke Sistem</p>
 
-        <form action="<?= base_url('login/cek_login');?>" method="post" role="form">
+        <form action="<?= base_url('login/cek_login'); ?>" method="post" role="form">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="NIP" name="nip">
             <div class="input-group-append">
@@ -49,9 +49,9 @@
             <div class="col-8">
               <div class="icheck-primary">
                 <a href="#">
-                <label for="remember">
-                  Lupa password?
-                </label></a>
+                  <label for="remember">
+                    Lupa password?
+                  </label></a>
               </div>
             </div>
             <!-- /.col -->
@@ -66,13 +66,22 @@
     </div>
   </div>
   <!-- /.login-box -->
+  <?php $this->load->view('template/js.php'); ?>
 
-  <!-- jQuery -->
-  <script src="<?= base_url();?>aset/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="<?= base_url();?>aset/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?= base_url();?>aset/dist/js/adminlte.min.js"></script>
+  <script>
+    $(function() {
+      const flashdata = $('.flash-data').data('flashdata');
+      const flashdatatidak = $('.flash-data-tidak').data('flashdata');
+      if (flashdata) {
+        toastr.success(flashdata);
+      }
+
+      if (flashdatatidak) {
+        toastr.error(flashdatatidak);
+      }
+    })
+  </script>
 
 </body>
+
 </html>

@@ -23,8 +23,8 @@ $segmen2 = $this->uri->segment(2);
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item has-treeview <?php ($segmen1 == 'dashboard') ? 'menu-open' : ''; ?>">
-          <a href="<?= base_url('dashboard'); ?>" class="nav-link <?= ($segmen1 == 'dashboard') ? 'active' : ''; ?>">
+        <li class="nav-item has-treeview <?php ($segmen1 == 'dashboard' && $segmen2 == '') ? 'menu-open' : ''; ?>">
+          <a href="<?= base_url('dashboard'); ?>" class="nav-link <?= ($segmen1 == 'dashboard' && $segmen2 == '') ? 'active' : ''; ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -85,17 +85,15 @@ $segmen2 = $this->uri->segment(2);
           </ul>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('notifikasi'); ?>" class="nav-link  <?php if ($segmen1 == 'notifikasi') {
-                                                                      echo 'active';
-                                                                    } ?>">
+          <a href="<?= base_url('notifikasi'); ?>" class="nav-link  <?= ($segmen1 == 'notifikasi') ? 'active' : ''; ?>">
             <i class="nav-icon fas fa-bell"></i>
             <p>
               Notifikasi
             </p>
           </a>
         </li>
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview <?= (($segmen1 == 'dashboard' && $segmen2 == 'profil') || ($segmen1 == 'dashboard' && $segmen2 == 'ubah_password')) ? 'menu-open' : ''; ?>">
+          <a href="#" class="nav-link <?= (($segmen1 == 'dashboard' && $segmen2 == 'profil') || ($segmen1 == 'dashboard' && $segmen2 == 'ubah_password')) ? 'active' : ''; ?>">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Akun
@@ -104,17 +102,13 @@ $segmen2 = $this->uri->segment(2);
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= base_url('dashboard/profil'); ?>" class="nav-link <?php if ($segmen1 == 'dashboard' and $segmen2 == 'profil') {
-                                                                                echo 'active';
-                                                                              } ?>">
+              <a href="<?= base_url('dashboard/profil'); ?>" class="nav-link <?= ($segmen1 == 'dashboard' && $segmen2 == 'profil') ? 'active' : ''; ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Profil</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url('dashboard/ubahpassword'); ?>" class="nav-link <?php if ($segmen1 == 'dashboard' and $segmen2 == 'ubahpassword') {
-                                                                                      echo 'active';
-                                                                                    } ?>">
+              <a href="<?= base_url('dashboard/ubah_password'); ?>" class="nav-link <?= ($segmen1 == 'dashboard' && $segmen2 == 'ubah_password') ? 'active' : ''; ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Ubah Password</p>
               </a>

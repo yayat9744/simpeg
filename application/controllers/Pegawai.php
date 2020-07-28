@@ -129,6 +129,18 @@ class Pegawai extends CI_Controller
         }
     }
 
+    public function reset_password($nip)
+    {
+        $query = $this->m_pegawai->reset_password($nip);
+        if ($query) {
+            $this->session->set_flashdata("berhasil", "Reset password berhasil");
+            redirect('pegawai');
+        } else {
+            $this->session->set_flashdata("gagal", "Reset password tidak berhasil");
+            redirect('pegawai');
+        }
+    }
+
     public function hapus_riwayat($id_riwayat, $nip)
     {
         $query = $this->m_pegawai->hapus_dt_riwayat($id_riwayat);

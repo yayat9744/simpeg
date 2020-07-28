@@ -399,7 +399,18 @@
                     if (res.status) {
                         $(".btn-submit").removeAttr("disabled", "disabled");
                         toastr.success(res.pesan);
-                        $("#nama").val(res.data.nama);
+
+                        if (res.data.gelar_depan != "" && res.data.gelar_belakang == "") {
+                            $("#nama").val(res.data.gelar_depan + ". " + res.data.nama);
+                        } else if (res.data.gelar_depan == "" && res.data.gelar_belakang != "") {
+                            $("#nama").val(res.data.nama + ", " + res.data.gelar_belakang);
+                        } else if (res.data.gelar_depan != "" && res.data.gelar_belakang != "") {
+                            $("#nama").val(res.data.gelar_depan + ". " +
+                                res.data.nama + ", " + res.data.gelar_belakang);
+                        } else if (res.data.gelar_depan == "" && res.data.gelar_belakang == "") {
+                            $("#nama").val(res.data.nama);
+                        }
+
                         $("#tanggal_lahir").val(res.data.tanggal_lahir);
                         $("#jabatan_aktif").val(res.data.nama_jabatan);
                         $("#golongan_aktif").val(res.data.nama_golongan);

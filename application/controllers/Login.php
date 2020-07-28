@@ -25,9 +25,11 @@ class Login extends CI_Controller
 				$this->session->set_userdata($session);
 				redirect('dashboard');
 			} else {
+				$this->session->set_flashdata('gagal', 'Password tidak tepat');
 				redirect('login');
 			}
 		} else {
+			$this->session->set_flashdata('gagal', 'User tidak terdaftar');
 			redirect('login');
 		}
 	}

@@ -1,8 +1,12 @@
 ###################
 Application Name
 ###################
-Sistem Informasi Kepegawaian (SIMPEG),
-menggunakan framework CodeIgniter.
+Sistem Informasi Kepegawain atau 
+SIMPEG dikembangkan oleh Hiland Group, 
+menggunakan framework CI3, 
+dan fitur realtime notifikasi informasi 
+kenaikan berkala, kenaikan pangkat dan 
+informasi pensiun.
 
 ******************
 Application Features
@@ -15,16 +19,21 @@ Application Features
 ******************
 Proggress Development
 ******************
-* Dashboard (On Process)
-* Pegawai (On Process)
+* Dashboard (Finish)
+* Pegawai (Finish)
     * Data Pegawai (Finish)
-    * Dokumen Pegawai (On Process)
+    * Dokumen Pegawai (Finish)
     * Riwayat Kenaikan (Finish)
 * Master Data (Finish)
     * Golongan (Finish)
     * Jabatan (Finish)
-* Notifikasi (On Process)
-* Akun (On Process)
-    * Profil (On Process)
-    * Ubah Password (On Process)
+* Notifikasi (Finish)
+* Akun (Finish)
+    * Profil (Finish)
+    * Ubah Password (Finish)
     * Logout (Finish)
+
+******************
+Version Development
+******************
+* versi 1.0

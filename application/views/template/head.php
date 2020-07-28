@@ -3,6 +3,8 @@
 <title>Sistem Informasi Kepegawaian </title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="title" content="Sistem Informasi Kepegawaian, SIMPEG, Hiland.id">
+<meta name="description" content="Sistem Informasi Kepegawain atau SIMPEG dikembangkan oleh Hiland Group, menggunakan framework CI3, dan fitur realtime notifikasi informasi kenaikan berkala, kenaikan pangkat dan informasi pensiun.">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="<?= base_url(); ?>aset/plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->

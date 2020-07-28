@@ -47,7 +47,10 @@
                     <a href="#" class="btn btn-primary" onclick="dt_edit('<?= $data->nip; ?>');">
                       Edit
                     </a>
-                    <a href="#" class="btn btn-danger btn-md" onclick="hapus_dt_pegawai('<?= $data->nip; ?>');">Hapus</a>
+                    <a href="#" class="btn btn-danger" onclick="reset_password('<?= $data->nip; ?>');" title="Password Default : 12345">
+                      Reset Password (12345)
+                    </a>
+                    <a href="#" class="btn btn-danger" onclick="hapus_dt_pegawai('<?= $data->nip; ?>');">Hapus</a>
                   </td>
                 </tr>
               <?php
@@ -335,11 +338,13 @@
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="12345" required>
+                  <i class="text-info">Password default adalah 12345</i>
                 </div>
                 <div class="form-group">
-                  <label for="password">Konfirmasi Password</label>
+                  <label for="c-password">Konfirmasi Password</label>
                   <input type="password" class="form-control" name="c-password" id="c-password" placeholder="Konfirmasi Password" required>
+                  <i class="text-warning" id="passtidaksama"></i>
                 </div>
                 <p>Jika dirasa seluruh data telah terpenuhi dan sesuai, silahkan untuk menklik tombol simpan dibawah.</p>
               </div>
@@ -755,6 +760,37 @@
       responsive: true,
       language: {
         url: "<?= base_url(); ?>aset/ID.json"
+      },
+      columnDefs: [{
+          responsivePriority: 1,
+          targets: 0
+        },
+        {
+          responsivePriority: 2,
+          targets: 1
+        },
+        {
+          responsivePriority: 3,
+          targets: 2
+        },
+        {
+          responsivePriority: 4,
+          targets: -1
+        }
+      ]
+    });
+
+    $(".btn-submit").attr("disabled", "disabled");
+    $('#c-password').on('keyup', function() {
+      var nps = $("#c-password").val();
+      var ps = $("#password").val();
+
+      if (nps == ps) {
+        $("#passtidaksama").text("");
+        $(".btn-submit").removeAttr("disabled", "disabled");
+      } else {
+        $("#passtidaksama").text("Password konfirmasi tidak sama dengan password baru");
+        $(".btn-submit").attr("disabled", "disabled");
       }
     });
 
@@ -1460,6 +1496,24 @@
         });
       }
     });
+  }
+
+  function reset_password(nip) {
+    let href = "<?= base_url(); ?>pegawai/reset_password/" + nip;
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: "Akan mereset password akun pegawai dengan NIP " +
+        nip + ".",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Reset Password'
+    }).then((result) => {
+      if (result.value) {
+        document.location.href = href;
+      }
+    })
   }
 
   function readURL(input) {

@@ -410,7 +410,7 @@ class M_pegawai extends CI_Model
 
         // $q_pengangkatan = $this->db->update('pengangkatan', $data_pengangkatan, array('nip' => $this->input->post('nip')));
 
-        $q_riwayat = $this->db->update('riwayat_kenaikan_pangkat', $data_riwayat, array('id_riwayat' => $this->input->post('id)riwayat')));
+        $q_riwayat = $this->db->update('riwayat_kenaikan_pangkat', $data_riwayat, array('id_riwayat' => $this->input->post('id_riwayat')));
 
         if ($q_riwayat) {
             return true;
@@ -506,9 +506,15 @@ class M_pegawai extends CI_Model
         $q_pengangkatan = $this->db->delete('pengangkatan');
 
         $this->db->where('nip', $nip);
+        $q_dokumen = $this->db->delete('dokumen');
+
+        $this->db->where('nip', $nip);
+        $q_notifikasi = $this->db->delete('notifikasi');
+
+        $this->db->where('nip', $nip);
         $q_riwayat_kenaikan_pangkat = $this->db->delete('riwayat_kenaikan_pangkat');
 
-        if ($q_pegawai && $q_akun && $q_pengangkatan && $q_riwayat_kenaikan_pangkat) {
+        if ($q_pegawai && $q_akun && $q_pengangkatan && $q_dokumen && $q_notifikasi && $q_riwayat_kenaikan_pangkat) {
             return true;
         } else {
             return false;
@@ -543,6 +549,16 @@ class M_pegawai extends CI_Model
         $q_riwayat_kenaikan_pangkat = $this->db->delete('riwayat_kenaikan_pangkat');
 
         if ($q_pegawai && $q_pengangkatan && $q_riwayat_kenaikan_pangkat) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function reset_password($nip)
+    {
+        $q = $this->db->update('akun', array('password' => md5("12345")), array('nip' => $nip));
+        if ($q) {
             return true;
         } else {
             return false;
